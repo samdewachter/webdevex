@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 use DB;
 use App\Setting;
+use Illuminate\Support\Facades\Redirect;
 
 class AdminController extends Controller
 {
@@ -56,6 +57,18 @@ class AdminController extends Controller
 
     public function updateSettings(Setting $id, Request $request)
     {
+        $this->validate($request, [
+                'beginPeriod1' => 'required',
+                'beginPeriod2' => 'required',
+                'beginPeriod3' => 'required',
+                'beginPeriod4' => 'required',
+                'endPeriod1' => 'required',
+                'endPeriod2' => 'required',
+                'endPeriod3' => 'required',
+                'endPeriod4' => 'required',
+                'now' => 'required',
+            ]);
+
     	$id->beginPeriod1 = $request->beginPeriod1;
     	$id->beginPeriod2 = $request->beginPeriod2;
     	$id->beginPeriod3 = $request->beginPeriod3;
@@ -68,7 +81,7 @@ class AdminController extends Controller
 
     	$id->save();
 
-    	return back();
+    	return Redirect::back()->withErrors(['Settings succesfully updated']);
     }
 
 }

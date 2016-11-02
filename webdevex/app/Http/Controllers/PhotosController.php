@@ -8,7 +8,7 @@ use App\UserVote;
 use App\User;
 use Auth;
 use DB;
-use App\setting;
+use App\Setting;
 
 class PhotosController extends Controller
 {

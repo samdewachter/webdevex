@@ -8,7 +8,7 @@ use App\Photo;
 use Auth;
 use DB;
 use Carbon\Carbon;
-use App\setting;
+use App\Setting;
 
 class UploadController extends Controller
 {

@@ -3,7 +3,9 @@
 @section('content')
 
 	<div class="col-md-8 col-md-offset-2 settings">
-
+		@if($errors->any())
+			<h4 class="green">{{$errors->first()}}</h4>
+		@endif
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<h3 class="panel-title">Settings</h3>
