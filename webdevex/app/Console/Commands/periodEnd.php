@@ -7,7 +7,7 @@ use DB;
 use App\Photo;
 use App\Winner;
 use App\User;
-use App\Mail\OrderShipped;
+use App\Mail\WinnerEmail;
 use Illuminate\Mail\Mailable;
 use Mail;
 
@@ -62,7 +62,7 @@ class periodEnd extends Command
 
             $winner->save();
         
-            Mail::to('samdewachter@hotmail.com')->send(new OrderShipped());
+            Mail::to('samdewachter@hotmail.com')->send(new WinnerEmail($winner));
         
 
             $photos = Photo::all();

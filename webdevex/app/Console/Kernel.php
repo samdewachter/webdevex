@@ -30,22 +30,30 @@ class Kernel extends ConsoleKernel
     {
         $settings = Setting::find(1);
 
-        $endPeriod1 = explode('-', $settings->endPeriod1);
-        $endPeriod2 = explode('-', $settings->endPeriod2);
-        $endPeriod3 = explode('-', $settings->endPeriod3);
-        $endPeriod4 = explode('-', $settings->endPeriod4);
+        $endPeriod1 = preg_split("/[\s,-]+/", $settings->endPeriod1);
+        $endPeriod2 = preg_split("/[\s,-]+/", $settings->endPeriod2);
+        $endPeriod3 = preg_split("/[\s,-]+/", $settings->endPeriod3);
+        $endPeriod4 = preg_split("/[\s,-]+/", $settings->endPeriod4);
+
+        $cronPeriod1 = '59 23 '.$endPeriod1[2].' '.$endPeriod1[1].' *';
+
+        $cronPeriod2 = '59 23 '.$endPeriod2[2].' '.$endPeriod1[1].' *';
+
+        $cronPeriod3 = '59 23 '.$endPeriod3[2].' '.$endPeriod1[1].' *';
+
+        $cronPeriod4 = '59 23 '.$endPeriod4[2].' '.$endPeriod1[1].' *';
 
         $schedule->command('period:end')
-                 ->cron('* * ' + $endPeriod1[1] + ' ' + $endPeriod1[0] + ' * *');
+                 ->cron($cronPeriod1);
 
         $schedule->command('period:end')
-                 ->cron('* * ' + $endPeriod2[1] + ' ' + $endPeriod2[0] + ' * *');
+                 ->cron($cronPeriod2);
 
         $schedule->command('period:end')
-                 ->cron('* * ' + $endPeriod3[1] + ' ' + $endPeriod3[0] + ' * *');
+                 ->cron($cronPeriod3);
 
         $schedule->command('period:end')
-                 ->cron('* * ' + $endPeriod4[1] + ' ' + $endPeriod4[0] + ' * *');       
+                 ->cron($cronPeriod4);       
     }
 
     /**
